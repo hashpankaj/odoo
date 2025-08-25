@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- CRM Leads by Stage Graph -->
+    <record id="view_crm_lead_graph_by_stage" model="ir.ui.view">
+        <field name="name">crm.lead.graph.by.stage</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <graph string="Leads by Stage" type="pie">
+                <field name="stage_id"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Customers by KYC Status Graph -->
+    <record id="view_res_partner_graph_by_kyc_status" model="ir.ui.view">
+        <field name="name">res.partner.graph.by.kyc.status</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <graph string="Customers by KYC Status" type="pie">
+                <field name="kyc_status"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Loans by Type Graph -->
+    <record id="view_banking_loan_graph_by_type" model="ir.ui.view">
+        <field name="name">x_banking.loan.graph.by.type</field>
+        <field name="model">x_banking.loan</field>
+        <field name="arch" type="xml">
+            <graph string="Loans by Type" type="pie">
+                <field name="loan_type"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Tickets by Status Graph -->
+    <record id="view_banking_ticket_graph_by_status" model="ir.ui.view">
+        <field name="name">x_banking.ticket.graph.by.status</field>
+        <field name="model">x_banking.ticket</field>
+        <field name="arch" type="xml">
+            <graph string="Tickets by Status" type="pie">
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Accounts by Type Graph -->
+    <record id="view_banking_account_graph_by_type" model="ir.ui.view">
+        <field name="name">x_banking.account.graph.by.type</field>
+        <field name="model">x_banking.account</field>
+        <field name="arch" type="xml">
+            <graph string="Accounts by Type" type="pie">
+                <field name="account_type"/>
+            </graph>
+        </field>
+    </record>
+</odoo>

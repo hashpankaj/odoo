@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View for Banking Loan Application -->
+    <record id="banking_loan_application_view_form" model="ir.ui.view">
+        <field name="name">x_banking.loan.application.view.form</field>
+        <field name="model">x_banking.loan.application</field>
+        <field name="arch" type="xml">
+            <form string="Loan Application" class="o_banking_form_view">
+                <header class="o_banking_header">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submitted,initial_screening,approved,disbursed"/>
+                    <button name="action_submit_application" type="object" string="Submit Application" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_initial_screening" type="object" string="Initial Screening" class="oe_highlight" invisible="state != 'submitted'"/>
+                    <button name="action_financial_assessment" type="object" string="Financial Assessment" class="oe_highlight" invisible="state != 'initial_screening'"/>
+                    <button name="action_collateral_assessment" type="object" string="Collateral Assessment" class="oe_highlight" invisible="state != 'financial_assessment'"/>
+                    <button name="action_credit_scoring" type="object" string="Credit Scoring" class="oe_highlight" invisible="state != 'collateral_assessment'"/>
+                    <button name="action_internal_approvals" type="object" string="Internal Approvals" class="oe_highlight" invisible="state != 'credit_scoring'"/>
+                    <button name="action_approve" type="object" string="Approve" class="oe_highlight" invisible="state != 'internal_approvals'"/>
+                    <button name="action_sanction" type="object" string="Sanction" class="oe_highlight" invisible="state != 'approved'"/>
+                    <button name="action_disburse" type="object" string="Disburse" class="oe_highlight" invisible="state != 'sanctioned'"/>
+                    <button name="action_reject" type="object" string="Reject" invisible="state in ('rejected', 'cancelled', 'disbursed')"/>
+                    <button name="action_cancel" type="object" string="Cancel" invisible="state in ('rejected', 'cancelled', 'disbursed')"/>
+                </header>
+                <sheet class="o_banking_sheet">
+                    <div class="oe_title o_banking_card">
+                        <h1><field name="application_number"/></h1>
+                    </div>
+                    <group class="o_banking_card">
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="loan_type"/>
+                            <field name="loan_product"/>
+                            <field name="requested_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="tenure"/>
+                            <field name="repayment_frequency"/>
+                            <field name="proposed_collateral_type"/>
+                            <field name="collateral_valuation" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="repayment_source"/>
+                        </group>
+                    </group>
+
+                    <notebook class="o_banking_card">
+                        <page string="Supporting Documents" name="supporting_documents">
+                            <field name="supporting_document_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="document_type"/>
+                                    <field name="document" widget="binary" filename="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Financial Assessment" name="financial_assessment">
+                            <group>
+                                <group>
+                                    <field name="monthly_net_income" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="existing_loan_repayments" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="other_household_expenses" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <group>
+                                    <field name="total_disposable_income" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="recommended_eligible_loan_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="debt_to_income_ratio"/>
+                                    <field name="debt_service_ratio"/>
+                                    <field name="loan_to_value_ratio"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Guarantor Information" name="guarantor_information">
+                            <field name="guarantor_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="identification_number"/>
+                                    <field name="income_source"/>
+                                    <field name="relationship_with_applicant"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Approval &amp; Sanction" name="approval_sanction">
+                            <group>
+                                <group>
+                                    <field name="approved_loan_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="approved_tenure"/>
+                                    <field name="interest_rate"/>
+                                    <field name="interest_type"/>
+                                </group>
+                                <group>
+                                    <field name="repayment_schedule_generated"/>
+                                </group>
+                            </group>
+                            <group string="Conditions Precedent to Disbursement">
+                                <field name="conditions_precedent_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="is_met"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Disbursement Details" name="disbursement_details">
+                            <group>
+                                <group>
+                                    <field name="loan_account_number"/>
+                                    <field name="disbursement_date"/>
+                                    <field name="disbursement_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <group>
+                                    <field name="repayment_start_date"/>
+                                    <field name="emi_installment_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="next_due_date"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Banking Loan Application -->
+    <record id="banking_loan_application_view_tree" model="ir.ui.view">
+        <field name="name">x_banking.loan.application.view.tree</field>
+        <field name="model">x_banking.loan.application</field>
+        <field name="arch" type="xml">
+            <tree string="Loan Applications">
+                <field name="application_number"/>
+                <field name="partner_id"/>
+                <field name="loan_type"/>
+                <field name="requested_amount" widget="monetary"/>
+                <field name="state"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View for Banking Loan Application -->
+    <record id="banking_loan_application_view_kanban" model="ir.ui.view">
+        <field name="name">x_banking.loan.application.view.kanban</field>
+        <field name="model">x_banking.loan.application</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_banking_kanban_record">
+                <field name="application_number"/>
+                <field name="partner_id"/>
+                <field name="loan_type"/>
+                <field name="requested_amount"/>
+                <field name="currency_id" invisible="1"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong><field name="application_number"/></strong>
+                                <div>
+                                    <field name="partner_id"/>
+                                </div>
+                                <div>
+                                    <field name="loan_type"/>
+                                </div>
+                                <div>
+                                    <field name="requested_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action Window for Banking Loan Application -->
+    <record id="banking_loan_application_action" model="ir.actions.act_window">
+        <field name="name">Loan Applications</field>
+        <field name="res_model">x_banking.loan.application</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <!-- Menu Item for Loan Applications -->
+    <menuitem id="menu_banking_crm_loan_applications" name="Loan Applications" parent="menu_banking_crm_root" action="banking_loan_application_action" sequence="35"/>
+
+</odoo>

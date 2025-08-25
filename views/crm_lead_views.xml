@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="crm_lead_form_view_fullwidth_layout" model="ir.ui.view">
+    <field name="name">crm.lead.form.view.fullwidth.layout</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+    <field name="arch" type="xml">
+
+      <!-- Replace the group containing tag_ids with both columns and your full-width notebook underneath -->
+      <xpath expr="//field[@name='tag_ids']/ancestor::group[1]" position="replace">
+        <group class="o_banking_card">
+            <!-- Sidebar/Right info, adjust fields as needed -->
+            <field name="user_id"/>
+            <field name="date_deadline"/>
+            <field name="tag_ids"/>
+            <!-- Add sidebar fields here, e.g. priority, stage, etc. -->
+          </group>
+        <!-- Now, your full-width notebook below both columns -->
+        <div class="o_banking_notebook_container">
+          <notebook>
+            <page string="Banking Details" name="banking_details_tab" class="o_banking_card">
+              <group colspan="12">
+                <field name="expected_product_type"/>
+                <field name="lead_source_bank"/>
+                <field name="estimated_income"/>
+                <field name="employment_status"/>
+                <field name="existing_customer"/>
+                <field name="lead_score"/>
+              </group>
+            </page>
+            <page string="Lead Enquiry / Pre-Screening" name="lead_enquiry_tab" class="o_banking_card">
+              <group colspan="12">
+                <field name="customer_name_first"/>
+                <field name="customer_name_middle"/>
+                <field name="customer_name_last"/>
+                <field name="mobile_number"/>
+                <field name="national_id"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="marital_status"/>
+                <field name="residence_woreda"/>
+                <field name="residence_sub_city"/>
+                <field name="residence_region"/>
+                <field name="employment_type"/>
+                <field name="monthly_annual_income"/>
+                <field name="requested_loan_amount"/>
+                <field name="loan_purpose"/>
+                <field name="preferred_branch"/>
+                <field name="preferred_loan_officer_id"/>
+              </group>
+            </page>
+            <page string="Qualifying Questions" name="qualifying_questions_tab" class="o_banking_card">
+              <group colspan="12">
+                <field name="is_existing_bank_customer"/>
+                <field name="existing_account_number" invisible="not is_existing_bank_customer"/>
+                <field name="has_regular_income_source"/>
+                <field name="servicing_other_loans"/>
+                <field name="collateral_security_details"/>
+                <field name="has_guarantor"/>
+                <field name="is_eligible"/>
+                <!-- <button name="action_create_loan_application" type="object" string="Create Loan Application" class="oe_highlight" invisible="not is_eligible"/> -->
+              </group>
+            </page>
+          </notebook>
+        </div>
+         <group colspan="12" class="o_banking_card">
+            <button name="action_create_loan_application" type="object" string="Create Loan Application" class="oe_highlight" invisible="not is_eligible"/>
+          </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>

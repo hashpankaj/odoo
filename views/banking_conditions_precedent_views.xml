@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View for Banking Conditions Precedent -->
+    <record id="banking_conditions_precedent_view_tree" model="ir.ui.view">
+        <field name="name">x_banking.conditions.precedent.view.tree</field>
+        <field name="model">x_banking.conditions.precedent</field>
+        <field name="arch" type="xml">
+            <tree string="Conditions Precedent" editable="bottom" class="o_banking_list_view">
+                <field name="name"/>
+                <field name="is_met"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Banking Conditions Precedent -->
+    <record id="banking_conditions_precedent_view_form" model="ir.ui.view">
+        <field name="name">x_banking.conditions.precedent.view.form</field>
+        <field name="model">x_banking.conditions.precedent</field>
+        <field name="arch" type="xml">
+            <form string="Condition Precedent" class="o_banking_form_view">
+                <sheet class="o_banking_sheet">
+                    <group class="o_banking_card">
+                        <field name="name"/>
+                        <field name="is_met"/>
+                        <field name="loan_application_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Window for Banking Conditions Precedent -->
+    <record id="banking_conditions_precedent_action" model="ir.actions.act_window">
+        <field name="name">Conditions Precedent</field>
+        <field name="res_model">x_banking.conditions.precedent</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Item for Conditions Precedent (optional, mainly for testing/direct access) -->
+    <menuitem id="menu_banking_crm_conditions_precedent" name="Conditions Precedent" parent="menu_banking_crm_root" action="banking_conditions_precedent_action" sequence="70"/>
+
+</odoo>

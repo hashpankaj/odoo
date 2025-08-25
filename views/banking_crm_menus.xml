@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level menu for Banking CRM -->
+    <menuitem id="menu_banking_crm_root" name="Banking" sequence="10" web_icon="fa fa-bank"/>
+
+    
+
+    <!-- Sub-menu for Customers (formerly All External Partners) -->
+    <menuitem id="menu_banking_crm_customers" name="Customers" parent="menu_banking_crm_root" action="action_banking_crm_external_partners" sequence="10"/>
+
+    <!-- Sub-menu for Accounts -->
+    <menuitem id="menu_banking_crm_accounts" name="Accounts" parent="menu_banking_crm_root" action="banking_account_action" sequence="20"/>
+
+    <!-- Sub-menu for Loans -->
+    <menuitem id="menu_banking_crm_loans" name="Loans" parent="menu_banking_crm_root" action="banking_loan_action" sequence="30"/>
+
+    <!-- Sub-menu for Cards -->
+    <menuitem id="menu_banking_crm_cards" name="Cards" parent="menu_banking_crm_root" action="action_banking_card" sequence="35"/>
+
+    <!-- Sub-menu for CRM Leads/Opportunities (optional, if not already accessible) -->
+    <menuitem id="menu_banking_crm_leads" name="Banking Leads" parent="menu_banking_crm_root" action="crm.crm_lead_all_leads" sequence="40"/>
+
+    <!-- Internal Users Action -->
+    <record id="action_banking_crm_internal_users" model="ir.actions.act_window">
+        <field name="name">Internal Users</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('isInternal_user', '=', True)]</field>
+    </record>
+
+    <!-- Internal Users Menu -->
+    <menuitem id="menu_banking_crm_internal_users" name="Internal Users" parent="menu_banking_crm_root" action="action_banking_crm_internal_users" sequence="50"/>
+
+</odoo>

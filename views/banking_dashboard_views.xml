@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="banking_dashboard" name="Banking Dashboard">
+        <div class="o_banking_dashboard">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card o_banking_card">
+                        <div class="card-header">
+                            <h4 class="card-title">Financial Summary</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Total Loan Amount:</strong> <field name="total_loan_amount"/></p>
+                            <p><strong>Total Account Balance:</strong> <field name="total_account_balance"/></p>
+                            <p><strong>Active Loans:</strong> <field name="active_loans"/></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card o_banking_card">
+                        <div class="card-header">
+                            <h4 class="card-title">Customer Service</h4>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Open Tickets:</strong> <field name="open_tickets"/></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card o_banking_card">
+                        <div class="card-header">
+                            <h4 class="card-title">Recent Tickets</h4>
+                        </div>
+                        <div class="card-body">
+                            <field name="ticket_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="state"/>
+                                    <field name="priority"/>
+                                    <field name="user_id"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

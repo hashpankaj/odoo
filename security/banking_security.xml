@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Security Groups -->
+        <record id="group_banking_rm" model="res.groups">
+            <field name="name">Banking / Relationship Manager</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_sales_officer" model="res.groups">
+            <field name="name">Banking / Sales Officer</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_csr" model="res.groups">
+            <field name="name">Banking / Customer Service Representative</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_branch_manager" model="res.groups">
+            <field name="name">Banking / Branch Manager</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_loan_officer" model="res.groups">
+            <field name="name">Banking / Loan Officer</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_compliance_officer" model="res.groups">
+            <field name="name">Banking / Compliance Officer</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_marketing_user" model="res.groups">
+            <field name="name">Banking / Marketing User</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_banking_operations_user" model="res.groups">
+            <field name="name">Banking / Operations User</field>
+            <field name="category_id" ref="odoo_banking_crm.module_category_banking_crm"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+    </data>
+
+    </odoo>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Relationship Manager (RM) -->
+        <record id="user_rm_1" model="res.users">
+            <field name="name">RM User 1</field>
+            <field name="login">rm1</field>
+            <field name="password">rm1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_rm'))]"/>
+        </record>
+        <record id="user_rm_2" model="res.users">
+            <field name="name">RM User 2</field>
+            <field name="login">rm2</field>
+            <field name="password">rm2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_rm'))]"/>
+        </record>
+
+        <!-- Sales Officer / Business Development Executive -->
+        <record id="user_sales_officer_1" model="res.users">
+            <field name="name">Sales Officer 1</field>
+            <field name="login">so1</field>
+            <field name="password">so1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_sales_officer'))]"/>
+        </record>
+        <record id="user_sales_officer_2" model="res.users">
+            <field name="name">Sales Officer 2</field>
+            <field name="login">so2</field>
+            <field name="password">so2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_sales_officer'))]"/>
+        </record>
+
+        <!-- Customer Service Representative (CSR) -->
+        <record id="user_csr_1" model="res.users">
+            <field name="name">CSR User 1</field>
+            <field name="login">csr1</field>
+            <field name="password">csr1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_csr'))]"/>
+        </record>
+        <record id="user_csr_2" model="res.users">
+            <field name="name">CSR User 2</field>
+            <field name="login">csr2</field>
+            <field name="password">csr2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_csr'))]"/>
+        </record>
+
+        <!-- Branch Manager -->
+        <record id="user_branch_manager_1" model="res.users">
+            <field name="name">Branch Manager 1</field>
+            <field name="login">bm1</field>
+            <field name="password">bm1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_branch_manager'))]"/>
+        </record>
+        <record id="user_branch_manager_2" model="res.users">
+            <field name="name">Branch Manager 2</field>
+            <field name="login">bm2</field>
+            <field name="password">bm2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_branch_manager'))]"/>
+        </record>
+
+        <!-- Loan Officer / Credit Officer -->
+        <record id="user_loan_officer_1" model="res.users">
+            <field name="name">Loan Officer 1</field>
+            <field name="login">lo1</field>
+            <field name="password">lo1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_loan_officer'))]"/>
+        </record>
+        <record id="user_loan_officer_2" model="res.users">
+            <field name="name">Loan Officer 2</field>
+            <field name="login">lo2</field>
+            <field name="password">lo2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_loan_officer'))]"/>
+        </record>
+
+        <!-- Compliance Officer -->
+        <record id="user_compliance_officer_1" model="res.users">
+            <field name="name">Compliance Officer 1</field>
+            <field name="login">co1</field>
+            <field name="password">co1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_compliance_officer'))]"/>
+        </record>
+        <record id="user_compliance_officer_2" model="res.users">
+            <field name="name">Compliance Officer 2</field>
+            <field name="login">co2</field>
+            <field name="password">co2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_compliance_officer'))]"/>
+        </record>
+
+        <!-- Marketing User -->
+        <record id="user_marketing_user_1" model="res.users">
+            <field name="name">Marketing User 1</field>
+            <field name="login">mu1</field>
+            <field name="password">mu1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_marketing_user'))]"/>
+        </record>
+        <record id="user_marketing_user_2" model="res.users">
+            <field name="name">Marketing User 2</field>
+            <field name="login">mu2</field>
+            <field name="password">mu2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_marketing_user'))]"/>
+        </record>
+
+        <!-- Operations User -->
+        <record id="user_operations_user_1" model="res.users">
+            <field name="name">Operations User 1</field>
+            <field name="login">ou1</field>
+            <field name="password">ou1</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_operations_user'))]"/>
+        </record>
+        <record id="user_operations_user_2" model="res.users">
+            <field name="name">Operations User 2</field>
+            <field name="login">ou2</field>
+            <field name="password">ou2</field>
+            <field name="groups_id" eval="[(4, ref('odoo_banking_crm.group_banking_operations_user'))]"/>
+        </record>
+    </data>
+</odoo>

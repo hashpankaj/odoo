@@ -1,0 +1,84 @@
+Add your custom CSS here .o_form_view .o_form_sheet_bg>.o_form_sheet {
+    background-color: #f0f4f7;
+}
+
+.o_kanban_view .o_kanban_record {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.o_kanban_view .o_kanban_record:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.o_banking_dashboard {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.o_banking_dashboard .oe_button_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.o_banking_dashboard .oe_stat_button {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33% - 10px);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.o_banking_card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.o_banking_notebook_container {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.o_banking_header {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.o_banking_sheet {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.o_banking_kanban_record .oe_kanban_global_click {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.o_banking_list_view .o_list_view {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.o_banking_form_view .o_form_sheet_bg {
+    background-color: #f5f5f5;
+}
+
+.o_banking_tree_view .o_list_view {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

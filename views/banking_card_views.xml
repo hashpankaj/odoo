@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View for Banking Cards -->
+    <record id="view_banking_card_tree" model="ir.ui.view">
+        <field name="name">banking.card.tree</field>
+        <field name="model">banking.card</field>
+        <field name="arch" type="xml">
+            <tree string="Banking Cards">
+                <field name="name"/>
+                <field name="card_type"/>
+                <field name="cardholder_name"/>
+                <field name="account_id"/>
+                <field name="expiration_date"/>
+                <field name="is_active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Banking Cards -->
+    <record id="view_banking_card_form" model="ir.ui.view">
+        <field name="name">banking.card.form</field>
+        <field name="model">banking.card</field>
+        <field name="arch" type="xml">
+            <form string="Banking Card">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="card_type"/>
+                            <field name="expiration_date"/>
+                        </group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="account_id"/>
+                            <field name="is_active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View for Banking Cards -->
+    <record id="view_banking_card_search" model="ir.ui.view">
+        <field name="name">banking.card.search</field>
+        <field name="model">banking.card</field>
+        <field name="arch" type="xml">
+            <search string="Search Cards">
+                <field name="name"/>
+                <field name="card_type"/>
+                <field name="cardholder_name"/>
+                <field name="account_id"/>
+                <field name="partner_id"/>
+                <filter string="Active" name="active" domain="[('is_active', '=', True)]"/>
+                <filter string="Inactive" name="inactive" domain="[('is_active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Banking Cards -->
+    <record id="action_banking_card" model="ir.actions.act_window">
+        <field name="name">Cards</field>
+        <field name="res_model">banking.card</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new banking card
+            </p><p>
+                Manage all banking cards in the system.
+            </p>
+        </field>
+    </record>
+</odoo>
