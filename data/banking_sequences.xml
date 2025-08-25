@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Banking Customer Sequence -->
+        <record id="seq_banking_customer" model="ir.sequence">
+            <field name="name">Banking Customer Sequence</field>
+            <field name="code">banking.customer</field>
+            <field name="prefix">CUST</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Banking Account Sequence -->
+        <record id="seq_banking_account" model="ir.sequence">
+            <field name="name">Banking Account Sequence</field>
+            <field name="code">banking.account</field>
+            <field name="prefix">ACC</field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Banking Transaction Sequence -->
+        <record id="seq_banking_transaction" model="ir.sequence">
+            <field name="name">Banking Transaction Sequence</field>
+            <field name="code">banking.transaction</field>
+            <field name="prefix">TXN</field>
+            <field name="padding">10</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Banking Loan Sequence -->
+        <record id="seq_banking_loan" model="ir.sequence">
+            <field name="name">Banking Loan Sequence</field>
+            <field name="code">banking.loan</field>
+            <field name="prefix">LOAN</field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Banking Card Sequence -->
+        <record id="seq_banking_card" model="ir.sequence">
+            <field name="name">Banking Card Sequence</field>
+            <field name="code">banking.card</field>
+            <field name="prefix">CARD</field>
+            <field name="padding">8</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

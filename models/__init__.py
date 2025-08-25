@@ -1,5 +1,7 @@
+from . import banking_customer
 from . import res_partner
 from . import banking_account
+from . import banking_transaction
 from . import banking_loan
 from . import crm_lead
 from . import banking_loan_document

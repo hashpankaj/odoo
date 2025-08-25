@@ -10,11 +10,13 @@
     ],
     "data": [
         "data/ir_model_data.xml",
+        "data/banking_sequences.xml",
         "security/ir_model_access.xml",
         "security/banking_security.xml",
         "security/banking_security_rules.xml",
         "security/ir.model.access.csv",
         "views/banking_crm_customer_actions.xml",
+        "views/banking_customer_views.xml",
         "views/crm_lead_views.xml",
         "views/res_partner_views.xml",
         "views/banking_crm_customer_filter.xml",
@@ -32,6 +34,7 @@
         "views/banking_guarantor_views.xml",
         "views/banking_overall_dashboard_views.xml",
         "views/banking_dashboard_graphs.xml",
+        "views/banking_modern_dashboard.xml",
         "data/banking_crm_demo_data.xml",
         "data/banking_crm_additional_demo_data.xml",
         "data/banking_crm_seed_data.xml",
@@ -41,6 +44,7 @@
     "assets": {
         "web.assets_backend": [
             "/odoo_banking_crm/static/src/css/custom_styles.css",
+            "/odoo_banking_crm/static/src/js/dashboard.js",
         ],
     },
     "installable": True,

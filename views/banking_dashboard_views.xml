@@ -1,46 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="banking_dashboard" name="Banking Dashboard">
-        <div class="o_banking_dashboard">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card o_banking_card">
-                        <div class="card-header">
-                            <h4 class="card-title">Financial Summary</h4>
+    <!-- Modern Banking Dashboard Template -->
+    <template id="banking_dashboard" name="Modern Banking Dashboard">
+        <div class="o_banking_dashboard_modern">
+            <!-- Key Metrics Row -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="metric-card bg-primary">
+                        <div class="metric-icon">
+                            <i class="fa fa-users fa-2x"></i>
                         </div>
-                        <div class="card-body">
-                            <p><strong>Total Loan Amount:</strong> <field name="total_loan_amount"/></p>
-                            <p><strong>Total Account Balance:</strong> <field name="total_account_balance"/></p>
-                            <p><strong>Active Loans:</strong> <field name="active_loans"/></p>
+                        <div class="metric-content">
+                            <h3 class="metric-value"><field name="total_customers"/></h3>
+                            <p class="metric-label">Total Customers</p>
+                            <small class="metric-change text-success">
+                                <i class="fa fa-arrow-up"></i> 12% from last month
+                            </small>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="card o_banking_card">
-                        <div class="card-header">
-                            <h4 class="card-title">Customer Service</h4>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="metric-card bg-success">
+                        <div class="metric-icon">
+                            <i class="fa fa-bank fa-2x"></i>
                         </div>
-                        <div class="card-body">
-                            <p><strong>Open Tickets:</strong> <field name="open_tickets"/></p>
+                        <div class="metric-content">
+                            <h3 class="metric-value"><field name="total_balance_accounts" widget="monetary"/></h3>
+                            <p class="metric-label">Total Deposits</p>
+                            <small class="metric-change text-success">
+                                <i class="fa fa-arrow-up"></i> 8% from last month
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="metric-card bg-warning">
+                        <div class="metric-icon">
+                            <i class="fa fa-money fa-2x"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 class="metric-value"><field name="total_principal_amount" widget="monetary"/></h3>
+                            <p class="metric-label">Total Loans</p>
+                            <small class="metric-change text-success">
+                                <i class="fa fa-arrow-up"></i> 15% from last month
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="metric-card bg-info">
+                        <div class="metric-icon">
+                            <i class="fa fa-ticket fa-2x"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3 class="metric-value"><field name="tickets_open"/></h3>
+                            <p class="metric-label">Open Tickets</p>
+                            <small class="metric-change text-danger">
+                                <i class="fa fa-arrow-down"></i> 5% from last month
+                            </small>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card o_banking_card">
-                        <div class="card-header">
-                            <h4 class="card-title">Recent Tickets</h4>
+
+            <!-- Charts and Analytics Row -->
+            <div class="row mb-4">
+                <div class="col-lg-8 mb-3">
+                    <div class="dashboard-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Portfolio Performance</h5>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-primary active">7D</button>
+                                <button type="button" class="btn btn-outline-primary">30D</button>
+                                <button type="button" class="btn btn-outline-primary">90D</button>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <field name="ticket_ids">
-                                <tree>
-                                    <field name="name"/>
-                                    <field name="state"/>
-                                    <field name="priority"/>
-                                    <field name="user_id"/>
-                                </tree>
-                            </field>
+                            <canvas id="portfolioChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Customer Distribution</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="customerChart" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -48,3 +94,69 @@
         </div>
     </template>
 </odoo>
+
+            <!-- Quick Actions and Recent Activity -->
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="quick-actions">
+                                <button class="btn btn-primary btn-block mb-2">
+                                    <i class="fa fa-plus mr-2"></i>New Customer
+                                </button>
+                                <button class="btn btn-success btn-block mb-2">
+                                    <i class="fa fa-bank mr-2"></i>Open Account
+                                </button>
+                                <button class="btn btn-warning btn-block mb-2">
+                                    <i class="fa fa-money mr-2"></i>Process Loan
+                                </button>
+                                <button class="btn btn-info btn-block">
+                                    <i class="fa fa-credit-card mr-2"></i>Issue Card
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 mb-3">
+                    <div class="dashboard-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Recent Activities</h5>
+                            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="activity-feed">
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-success">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">Loan application approved for John Doe</p>
+                                        <small class="activity-time text-muted">2 minutes ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-primary">
+                                        <i class="fa fa-user-plus"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">New customer onboarded: Jane Smith</p>
+                                        <small class="activity-time text-muted">15 minutes ago</small>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon bg-warning">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p class="activity-text">KYC verification pending for 3 customers</p>
+                                        <small class="activity-time text-muted">1 hour ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

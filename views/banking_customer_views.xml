@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sequence for Customer ID -->
+    <record id="seq_banking_customer" model="ir.sequence">
+        <field name="name">Banking Customer Sequence</field>
+        <field name="code">banking.customer</field>
+        <field name="prefix">CUST</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <!-- Tree View -->
+    <record id="banking_customer_view_tree" model="ir.ui.view">
+        <field name="name">banking.customer.view.tree</field>
+        <field name="model">banking.customer</field>
+        <field name="arch" type="xml">
+            <tree string="Banking Customers" decoration-success="status=='active'" 
+                  decoration-warning="status=='inactive'" decoration-danger="status=='suspended'">
+                <field name="customer_id"/>
+                <field name="display_name"/>
+                <field name="customer_segment"/>
+                <field name="kyc_status" widget="badge" 
+                       decoration-success="kyc_status=='verified'"
+                       decoration-warning="kyc_status=='pending'"
+                       decoration-danger="kyc_status=='rejected'"/>
+                <field name="total_balance" widget="monetary"/>
+                <field name="active_accounts_count"/>
+                <field name="relationship_manager_id"/>
+                <field name="status" widget="badge"/>
+                <field name="currency_id" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="banking_customer_view_form" model="ir.ui.view">
+        <field name="name">banking.customer.view.form</field>
+        <field name="model">banking.customer</field>
+        <field name="arch" type="xml">
+            <form string="Banking Customer">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="active,inactive,suspended"/>
+                    <button name="action_update_kyc_status" type="object" string="Update KYC" 
+                            class="btn-primary" invisible="status=='closed'"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" icon="fa-bank" type="object" 
+                                name="action_view_accounts" invisible="not active_accounts_count">
+                            <field name="active_accounts_count" widget="statinfo" string="Accounts"/>
+                        </button>
+                        <button class="oe_stat_button" icon="fa-money" type="object" 
+                                name="action_view_loans" invisible="not active_loans_count">
+                            <field name="active_loans_count" widget="statinfo" string="Loans"/>
+                        </button>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <h1><field name="display_name" readonly="1"/></h1>
+                        <h3><field name="customer_id" readonly="1"/></h3>
+                    </div>
+
+                    <group>
+                        <group string="Basic Information">
+                            <field name="partner_id" options="{'no_create': True}"/>
+                            <field name="cif_number"/>
+                            <field name="customer_segment"/>
+                            <field name="relationship_manager_id"/>
+                            <field name="onboarding_date"/>
+                            <field name="customer_since" readonly="1"/>
+                        </group>
+                        <group string="KYC & Compliance">
+                            <field name="kyc_status" widget="badge"/>
+                            <field name="kyc_completion_date" invisible="kyc_status!='verified'"/>
+                            <field name="kyc_expiry_date" invisible="kyc_status!='verified'"/>
+                            <field name="risk_rating" widget="badge"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Financial Profile">
+                            <field name="credit_score"/>
+                            <field name="credit_limit" widget="monetary"/>
+                            <field name="monthly_income" widget="monetary"/>
+                            <field name="total_balance" widget="monetary" readonly="1"/>
+                            <field name="total_loans" widget="monetary" readonly="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                        <group string="Communication">
+                            <field name="communication_preference"/>
+                            <field name="last_contact_date"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Accounts" name="accounts">
+                            <field name="account_ids">
+                                <tree decoration-success="status=='active'" decoration-muted="status=='closed'">
+                                    <field name="account_number"/>
+                                    <field name="account_type"/>
+                                    <field name="balance" widget="monetary"/>
+                                    <field name="status" widget="badge"/>
+                                    <field name="opening_date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Loans" name="loans">
+                            <field name="loan_ids">
+                                <tree decoration-success="status=='active'" decoration-warning="status=='overdue'">
+                                    <field name="loan_number"/>
+                                    <field name="loan_type"/>
+                                    <field name="principal_amount" widget="monetary"/>
+                                    <field name="outstanding_amount" widget="monetary"/>
+                                    <field name="status" widget="badge"/>
+                                    <field name="next_payment_date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Cards" name="cards">
+                            <field name="card_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="card_type"/>
+                                    <field name="expiration_date"/>
+                                    <field name="is_active" widget="boolean_toggle"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Recent Transactions" name="transactions">
+                            <field name="transaction_ids" readonly="1">
+                                <tree limit="10">
+                                    <field name="date"/>
+                                    <field name="reference"/>
+                                    <field name="description"/>
+                                    <field name="type" widget="badge"/>
+                                    <field name="amount" widget="monetary"/>
+                                    <field name="status" widget="badge"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="banking_customer_view_kanban" model="ir.ui.view">
+        <field name="name">banking.customer.view.kanban</field>
+        <field name="model">banking.customer</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="customer_id"/>
+                <field name="display_name"/>
+                <field name="customer_segment"/>
+                <field name="kyc_status"/>
+                <field name="total_balance"/>
+                <field name="status"/>
+                <field name="currency_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="display_name"/>
+                                    </strong>
+                                    <small class="o_kanban_record_subtitle text-muted">
+                                        <field name="customer_id"/>
+                                    </small>
+                                </div>
+                                <span class="float-right">
+                                    <field name="kyc_status" widget="label_selection" 
+                                           options="{'classes': {'verified': 'success', 'pending': 'warning', 'rejected': 'danger'}}"/>
+                                </span>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span class="text-muted">Segment:</span>
+                                        <field name="customer_segment"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="text-muted">Balance:</span>
+                                        <field name="total_balance" widget="monetary"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="banking_customer_view_search" model="ir.ui.view">
+        <field name="name">banking.customer.view.search</field>
+        <field name="model">banking.customer</field>
+        <field name="arch" type="xml">
+            <search string="Search Customers">
+                <field name="display_name" string="Customer"/>
+                <field name="customer_id"/>
+                <field name="cif_number"/>
+                <field name="partner_id"/>
+                <field name="relationship_manager_id"/>
+                
+                <filter string="Active" name="active" domain="[('status', '=', 'active')]"/>
+                <filter string="KYC Verified" name="kyc_verified" domain="[('kyc_status', '=', 'verified')]"/>
+                <filter string="KYC Pending" name="kyc_pending" domain="[('kyc_status', '=', 'pending')]"/>
+                <filter string="High Value" name="high_value" domain="[('total_balance', '>', 100000)]"/>
+                
+                <separator/>
+                <filter string="Premium Customers" name="premium" domain="[('customer_segment', '=', 'premium')]"/>
+                <filter string="Corporate Customers" name="corporate" domain="[('customer_segment', '=', 'corporate')]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="KYC Status" name="group_kyc" context="{'group_by': 'kyc_status'}"/>
+                    <filter string="Customer Segment" name="group_segment" context="{'group_by': 'customer_segment'}"/>
+                    <filter string="Relationship Manager" name="group_rm" context="{'group_by': 'relationship_manager_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action Window -->
+    <record id="banking_customer_action" model="ir.actions.act_window">
+        <field name="name">Banking Customers</field>
+        <field name="res_model">banking.customer</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="banking_customer_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first banking customer
+            </p>
+            <p>
+                Manage all your banking customers in one place with comprehensive KYC, 
+                financial profiles, and relationship management tools.
+            </p>
+        </field>
+    </record>
+</odoo>
